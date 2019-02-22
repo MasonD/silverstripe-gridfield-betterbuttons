@@ -7,6 +7,7 @@ use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest;
 use SilverStripe\Forms\LiteralField;
+use UncleCheese\BetterButtons\Extensions\BetterButtons;
 use UncleCheese\BetterButtons\Traits\Groupable;
 use UncleCheese\BetterButtons\Interfaces\BetterButtonInterface;
 
@@ -21,13 +22,6 @@ class Action extends LiteralField implements BetterButtonInterface
 {
     use Groupable;
     use Injectable;
-
-    /**
-     * @var array
-     */
-    private static $dependencies = [
-        'GridFieldRequest' => '%$' . GridFieldDetailForm_ItemRequest::class . '.betterbuttons',
-    ];
 
     /**
      * The form that this action is associated with
@@ -59,6 +53,7 @@ class Action extends LiteralField implements BetterButtonInterface
     public function __construct($text = null)
     {
         $this->buttonText = $text;
+        $this->gridFieldRequest = BetterButtons::getGridFieldRequest();
         parent::__construct($this->getButtonName(), "");
     }
 
