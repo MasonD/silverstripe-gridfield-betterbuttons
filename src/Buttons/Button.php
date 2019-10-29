@@ -5,6 +5,7 @@ namespace UncleCheese\BetterButtons\Buttons;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\GridField\GridFieldDetailForm_ItemRequest;
+use UncleCheese\BetterButtons\Extensions\BetterButtons;
 use UncleCheese\BetterButtons\Traits\Groupable;
 use UncleCheese\BetterButtons\Interfaces\BetterButtonInterface;
 
@@ -19,12 +20,10 @@ abstract class Button extends FormAction implements BetterButtonInterface
     use Groupable;
     use Injectable;
 
-    /**
-     * @var array
-     */
-    private static $dependencies = [
-        'GridFieldRequest' => '%$' . GridFieldDetailForm_ItemRequest::class . '.betterbuttons',
-    ];
+    public function __construct($action, $title = "", $form = null) {
+        parent::__construct($action, $title, $form);
+        $this->gridFieldRequest = BetterButtons::getGridFieldRequest();
+    }
 
     /**
      * The request that points to the GridFieldDetailForm
