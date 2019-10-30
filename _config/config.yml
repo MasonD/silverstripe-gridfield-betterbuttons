@@ -42,6 +42,9 @@ UncleCheese\BetterButtons\Extensions\BetterButtons:
       archive: true
       unpublish: true
       frontendLinks: true
+    versioned_create:
+      save: true
+      saveAndClose: true
 ---
 Only:
   moduleexists: silverstripe/userforms
